@@ -1,0 +1,12 @@
+// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel Simulate
+
+RWTexture2D<float> outputWaterTexture;
+Texture2D<float> inputWaterTexture;
+
+[numthreads(8,8,1)]
+void Simulate (uint3 id : SV_DispatchThreadID)
+{
+    outputWaterTexture[id.xy] = inputWaterTexture[id.xy + int2(0, 1)];
+
+}

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class DoubleBuffer
 {
@@ -26,5 +27,17 @@ public class DoubleBuffer
     public void Swap()
     {
         (_readID, _writeID) = (_writeID, _readID);
+    }
+
+    public void Release()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            _buffers[i].Release();
+            _buffers[i] = null;
+        }
+
+        _buffers = null;
+
     }
 }
